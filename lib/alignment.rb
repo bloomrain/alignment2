@@ -37,6 +37,17 @@ module Alignment
     end
   end
 
+  def self.church_params(options = {})
+    params = {
+      penalty01: 450,
+      penalty22: 440,
+      penalty21: 230,
+      c: 1
+    }.merge(options)
+
+    [params[:penalty21], params[:penalty22], params[:penalty01]]
+  end
+
   class AlignableText
     attr_reader :text
 
@@ -61,7 +72,7 @@ module Alignment
 
   # Aligns to strings of text +a+ and +b+ using method +method+. The boundaries of the
   # blocks to be aligned are denoted by a | character (with or without surrounding
-  # white-space). The sequence || denotes an anchor (or hard delimiter), i.e. a fixed 
+  # white-space). The sequence || denotes an anchor (or hard delimiter), i.e. a fixed
   # synchronisation point. There must be the same number of anchors in both strings,
   # but the number of boundaries may be different. The returned value is an array
   # of pairs of aligned strings.
@@ -77,7 +88,7 @@ module Alignment
       r = align_regions(x.split(BOUNDARY_REGEXP).collect { |region| AlignableText.new(region) },
                         y.split(BOUNDARY_REGEXP).collect { |region| AlignableText.new(region) },
                        method)
-      r.collect! { |i| [ i.left.collect(&:text).join(' '), i.right.collect(&:text).join(' ') ] }
+      r.collect! { |i| [ i.left.collect(&:text), i.right.collect(&:text) ] }
       result += r
     end
 
