@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.date = "2011-12-03"
   s.description = "Alignment functions for corpus linguistics."
   s.email = "mariuslj (at) ifi [dot] uio (dot) no"
-  s.extensions = ["ext/gale_church/extconf.rb"]
+  s.extensions = ["ext/alignment2/gale_church/extconf.rb"]
   s.extra_rdoc_files = [
     "README.rdoc"
   ]
@@ -22,9 +22,9 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
-    "ext/gale_church/.gitignore",
-    "ext/gale_church/extconf.rb",
-    "ext/gale_church/gale_church.c",
+    "ext/alignment2/gale_church/.gitignore",
+    "ext/alignment2/gale_church/extconf.rb",
+    "ext/alignment2/gale_church/gale_church.c",
     "lib/.gitignore",
     "lib/alignment2.rb",
     "test/test_alignment2.rb"

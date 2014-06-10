@@ -2,7 +2,7 @@ README.rdoc
 Rakefile
 test/test_alignment2.rb
 CHANGELOG
-ext/gale_church/gale_church.c
-ext/gale_church/extconf.rb
+ext/alignment2/gale_church/gale_church.c
+ext/alignment2/gale_church/extconf.rb
 lib/alignment2.rb
 Manifest
