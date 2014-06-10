@@ -56,14 +56,19 @@ static int two_side_distance(int x1, int y1, int x2, int y2);
 static int seq_align(int *x, int *y, int nx, int ny, int (*dist_funct)(),
                      struct alignment **align);
 
+
+int penalty21 = 389;          /* -100 * log([prob of 2-1 match] / [prob of 1-1 match]) */
+int penalty22 = 1149;          /* -100 * log([prob of 2-2 match] / [prob of 1-1 match]) */
+int penalty01 = 1149;          /* -100 * log([prob of 0-1 match] / [prob of 1-1 match]) */
+
 void Init_gale_church()
 {
   mLogos = rb_define_module("Alignment2");
   mGaleChurch = rb_define_module_under(mLogos, "GaleChurch");
-  rb_define_module_function(mGaleChurch, "align", method_align, 2);
+  rb_define_module_function(mGaleChurch, "align", method_align, 3);
 }
 
-VALUE method_align(VALUE self, VALUE len1, VALUE len2)
+VALUE method_align(VALUE self, VALUE len1, VALUE len2, VALUE options)
 {
   VALUE ret, res1, res2, grouped_regions1, grouped_regions2;
 
@@ -77,12 +82,20 @@ VALUE method_align(VALUE self, VALUE len1, VALUE len2)
 
   len1_x = (int *)malloc(RARRAY_LEN(len1) * sizeof(int));
   len2_x = (int *)malloc(RARRAY_LEN(len2) * sizeof(int));
+  options_x = (int *)malloc(RARRAY_LEN(options) * sizeof(int));
 
   for (i = 0; i < RARRAY_LEN(len1); i++)
     len1_x[i] = NUM2INT(rb_ary_entry(len1, i));
 
   for (i = 0; i < RARRAY_LEN(len2); i++)
     len2_x[i] = NUM2INT(rb_ary_entry(len2, i));
+
+  for (i = 0; i < RARRAY_LEN(options); i++)
+    options_x[i] = NUM2INT(rb_ary_entry(options, i));
+
+  penalty21 = options_x[0];
+  penalty22 = options_x[1];
+  penalty01 = options_x[2];
 
   n = seq_align(len1_x, len2_x, RARRAY_LEN(len1), RARRAY_LEN(len2),
                 two_side_distance, &align);
@@ -391,9 +404,15 @@ static int match(int len1,int len2)
 
 static int two_side_distance(int x1, int y1, int x2, int y2)
 {
-  int penalty21 = 230;          /* -100 * log([prob of 2-1 match] / [prob of 1-1 match]) */
-  int penalty22 = 440;          /* -100 * log([prob of 2-2 match] / [prob of 1-1 match]) */
-  int penalty01 = 450;          /* -100 * log([prob of 0-1 match] / [prob of 1-1 match]) */
+  /* LAW PENALTIES */
+  // int penalty21 = 389;          /* -100 * log([prob of 2-1 match] / [prob of 1-1 match]) */
+  // int penalty22 = 1149;          /* -100 * log([prob of 2-2 match] / [prob of 1-1 match]) */
+  // int penalty01 = 1149;          /* -100 * log([prob of 0-1 match] / [prob of 1-1 match]) */
+
+  /* DEFAULT PENALTIES
+  int penalty21 = 230;
+  int penalty22 = 440;
+  int penalty01 = 450;*/
 
   if (x2 == 0 && y2 == 0)
     if (x1 == 0)                        /* insertion */
