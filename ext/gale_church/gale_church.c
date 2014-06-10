@@ -3,10 +3,10 @@
  *               Pernilla Danielsson and Daniel Ridings
  * Algorithm Copyright:
  *               William Gale and Kenneth Church
- * Copyright (C) 2002-2004  Alberto Simões
+ * Copyright (C) 2002-2004  Alberto Simï¿½es
 
  * Ruby adaptation:
- *   Copyright (C) 2008  Marius L. Jøhndal
+ *   Copyright (C) 2008  Marius L. Jï¿½hndal
  *
  * This package is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -58,7 +58,7 @@ static int seq_align(int *x, int *y, int nx, int ny, int (*dist_funct)(),
 
 void Init_gale_church()
 {
-  mLogos = rb_define_module("Alignment");
+  mLogos = rb_define_module("Alignment2");
   mGaleChurch = rb_define_module_under(mLogos, "GaleChurch");
   rb_define_module_function(mGaleChurch, "align", method_align, 2);
 }

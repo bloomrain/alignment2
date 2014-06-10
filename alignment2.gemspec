@@ -4,7 +4,7 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = "alignment"
+  s.name = "alignment2"
   s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
@@ -26,10 +26,10 @@ Gem::Specification.new do |s|
     "ext/gale_church/extconf.rb",
     "ext/gale_church/gale_church.c",
     "lib/.gitignore",
-    "lib/alignment.rb",
-    "test/test_alignment.rb"
+    "lib/alignment2.rb",
+    "test/test_alignment2.rb"
   ]
-  s.homepage = "http://github.com/mlj/alignment"
+  s.homepage = "http://github.com/bloomrain/alignment2"
   s.require_paths = ["lib"]
   s.rubyforge_project = "alignment"
   s.rubygems_version = "1.8.11"
@@ -44,4 +44,3 @@ Gem::Specification.new do |s|
   else
   end
 end
-

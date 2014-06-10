@@ -3,7 +3,7 @@ begin
   require 'jeweler'
 
   Jeweler::Tasks.new do |p|
-    p.name = "alignment"
+    p.name = "alignment2"
     p.summary = "Alignment functions for corpus linguistics"
     p.description = "Alignment functions for corpus linguistics."
     p.authors = ['Marius L. Jøhndal']

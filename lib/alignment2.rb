@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 #
-# alignment.rb - Alignment functions
+# alignment2.rb - Alignment functions
 #
 # Written by Marius L. Jøhndal <mariuslj at ifi.uio.no>, 2008
 #
 require 'gale_church'
 
-module Alignment
+module Alignment2
   def self.is_alignable?(o)
     o.responds_to?(:weight)
   end
@@ -76,15 +76,12 @@ module Alignment
   # synchronisation point. There must be the same number of anchors in both strings,
   # but the number of boundaries may be different. The returned value is an array
   # of pairs of aligned strings.
-  def self.align_text(a, b, method = :gale_church)
+  def self.align_text(native_sentences, foreign_sentences, method = :gale_church)
     result = []
-
-    regions_a = a.split(ANCHOR_REGEXP)
-    regions_b = b.split(ANCHOR_REGEXP)
 
     raise ArgumentError.new("different number of anchors in strings") unless regions_a.length == regions_b.length
 
-    regions_a.zip(regions_b).each do |x, y|
+    native_sentences.zip(foreign_sentences).each do |x, y|
       r = align_regions(x.split(BOUNDARY_REGEXP).collect { |region| AlignableText.new(region) },
                         y.split(BOUNDARY_REGEXP).collect { |region| AlignableText.new(region) },
                        method)
