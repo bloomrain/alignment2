@@ -42,7 +42,7 @@ VALUE mGaleChurch = Qnil;
 
 void Init_gale_church();
 
-VALUE method_align(VALUE self, VALUE len1, VALUE len2);
+VALUE method_align(VALUE self, VALUE len1, VALUE len2, VALUE options);
 
 struct alignment {
   int x1;
