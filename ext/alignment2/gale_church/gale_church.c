@@ -76,6 +76,7 @@ VALUE method_align(VALUE self, VALUE len1, VALUE len2, VALUE options)
   struct alignment *align, *a;
   int *len1_x;
   int *len2_x;
+  int *options_x;
 
   res1 = rb_ary_new();
   res2 = rb_ary_new();
